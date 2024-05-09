@@ -1,0 +1,16 @@
+{% include "base.html" %} {% block content %}
+
+<div class="container d-flex flex-wrap justify-content-center">
+  {% for hotel in hotels %}
+  <div class="card m-2" style="width: 18rem">
+    <img src="{{hotel.image.url}}" class="card-img-top" alt="..." />
+    <div class="card-body">
+      <h5 class="card-title">{{hotel.title}}</h5>
+      <p class="card-text">{{hotel.description | truncatewords:20}}</p>
+      <a href="{% url "hotel_details" hotel.id%}" class="btn btn-primary">Details</a>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+{% include "navbar.html" %} 
+{% endblock %}

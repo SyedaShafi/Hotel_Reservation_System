@@ -1,0 +1,52 @@
+{% include "base.html" %} {% block content %}
+
+<div class="jumbotron jumbotron-fluid" id="backgroundContainer">
+  <div class="container text-center" style="position: relative; z-index: 1">
+    <h1 class="display-4 pt-5">Welcome to <strong>WanderStay</strong></h1>
+    <p class="mt-5" style="width: 80%; margin: auto">
+      Discover your perfect getaway with WanderStay. Whether you crave tranquil
+      nature retreats or vibrant city escapes, WanderStay offers tailored
+      accommodations for unforgettable experiences. Your adventure begins now.
+    </p>
+  </div>
+</div>
+
+{% comment %} --------------------------------------- user review section
+------------------------------ {% endcomment %}
+<h3 class="text-center my-5">User Reviews</h3>
+<div class="m-5" style="height: 300px">
+  <div
+    class="swiffy-slider slider-item-show2 slider-nav-sm slider-nav-page slider-item-snapstart slider-item-nogap slider-nav-round slider-nav-dark slider-indicators-sm slider-indicators-outside slider-indicators-round slider-indicators-dark slider-nav-animation slider-nav-animation-slideup slider-item-first-visible"
+  >
+    <div class="slider-container">
+      {% for review in reviews %}
+      <div class="p-3 p-xl-5 text-light" style="background-color: #52796f">
+        <h3 class="text-uppercase h5">Hotel: {{review.hotel.title}}</h3>
+        <h5>Reviewer: {{review.user.user.username}}</h5>
+        <p>{{review.body}}</p>
+        <p>{{review.rating}}</p>
+      </div>
+
+      {% endfor %}
+    </div>
+
+    <button type="button" class="slider-nav" aria-label="Go left"></button>
+    <button
+      type="button"
+      class="slider-nav slider-nav-next"
+      aria-label="Go left"
+    ></button>
+
+    <div class="slider-indicators d-md-none">
+      <button class="active" aria-label="Go to slide"></button>
+      <button aria-label="Go to slide"></button>
+      <button aria-label="Go to slide"></button>
+      <button aria-label="Go to slide"></button>
+      <button aria-label="Go to slide"></button>
+      <button aria-label="Go to slide"></button>
+    </div>
+  </div>
+</div>
+{% comment %} --------------------------------------- end of user review section
+------------------------------ {% endcomment %} {% include "navbar.html" %}
+{%endblock %}

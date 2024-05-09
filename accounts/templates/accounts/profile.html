@@ -1,0 +1,62 @@
+{% include "base.html" %} {% block content %}
+
+<div class="container">
+  <h2 class="my-2">Welcome, {{user.first_name}} {{user.last_name}}</h2>
+
+  {% if balance %}
+  <h2 class="my-2">Available Balance: {{ balance }}</h2>
+
+  {% else %}
+  <h2 class="my-2">Available Balance: N/A</h2>
+
+  {% endif %}
+  <div class="row">
+    <div class="col-md-6">
+      <a href="{% url "password_change" %}" type="submit" class="btn btn-primary my-2">Change Password</a>
+      <a href="{% url "set_password" %}" type="submit" class="btn btn-primary my-2">Set Password</a>
+    </div>
+  </div>
+
+  <hr />
+  <div>
+
+    {% if reservations is not None %}
+    
+    <h2>Reservations</h2>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Reservation ID</th>
+          <th>Hotel Name</th>
+          <th>Package</th>
+          <th>Total Price</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for r in reservations  %}
+        
+        <tr>
+          <td>{{r.id}}</td>
+          <td><a href="{% url "hotel_details" r.hotel.id %}">{{r.hotel}}</a></td>
+          <td>{{r.package}} Days</td>
+          <td>{{r.transaction.amount}}</td>
+          <td> 
+            <form action="{% url 'delete_reservation' r.id %}" method="post">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-danger">Check Out</button>
+            </form>
+          </td>
+        </tr>
+        
+        {% endfor %}
+        
+      </tbody>
+    </table>
+    
+    {% endif %}
+
+  </div>
+</div>
+{% include "navbar.html" %} 
+{% endblock %}
